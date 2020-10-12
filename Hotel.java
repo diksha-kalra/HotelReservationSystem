@@ -4,6 +4,7 @@ public class Hotel{
 	private String hotelName;
     private int regularWeekDay;
     private int regularWeekEnd;
+    private Long totalRate;
     
 	public Hotel(String hotelName, int regularWeekDay, int regularWeekEnd) {
 		super();
@@ -22,5 +23,13 @@ public class Hotel{
 
 	public int getRegularWeekEnd() {
 		return regularWeekEnd;
+	}
+
+	public Long getTotalRate() {
+		return totalRate;
+	}
+
+	public void setTotalRate(Long totalRate) {
+		this.totalRate = totalRate;
 	}
 }
