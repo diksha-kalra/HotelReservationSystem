@@ -38,7 +38,7 @@ public class HotelReservation {
 					hotel.setTotalRate(totalRate);
 				}
 			}
-			if (type.equalsIgnoreCase("rewards")) {
+			else if (type.equalsIgnoreCase("rewards")) {
 				for (Hotel hotel : listOfHotel) {
 					Long totalRate = weekdays * hotel.getRewardCustomerWeekDay()
 							+ weekends * hotel.getRewardCustomerWeekEnd();
@@ -75,9 +75,6 @@ public class HotelReservation {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy");
 		int index = userInput.indexOf(":");
 		String type = userInput.substring(0, index);
-		if (type.equalsIgnoreCase("regular") || type.equalsIgnoreCase("rewards")) {
-
-		}
 		int startDateIndex1 = 0, startDateIndex2 = 0;
 		startDateIndex1 = userInput.indexOf(":");
 		startDateIndex2 = userInput.indexOf(",");
@@ -105,7 +102,6 @@ public class HotelReservation {
 		} catch (InvalidEntriesException e) {
 			System.out.println(e);
 		}
-
 		return cheapestHotel;
 	}
 
