@@ -74,8 +74,7 @@ public class HotelReservation {
 		addHotel.addHotel("Bridgewood", 150, 50);
 		addHotel.addHotel("Ridgewood", 220, 150);
 		Hotel cheapestHotel = addHotel.determiningcheapestHotelBasedOnUserInput(userInput);
-		System.out.println(
-				"Cheapest Hotel-" + cheapestHotel.getHotelName() + " Total Rate-" + cheapestHotel.getTotalRate());
+		System.out.println("Cheapest Hotel-" + cheapestHotel.getHotelName() + " Total Rate-" + cheapestHotel.getTotalRate());
 		obj.close();
 	}
 }
