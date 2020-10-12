@@ -12,8 +12,8 @@ public class HotelReservation {
 
 	private ArrayList<Hotel> listOfHotel = new ArrayList<>();
 
-	public boolean addHotel(String hotelName, int regularWeekDay, int regularWeekEnd) {
-		Hotel hotel = new Hotel(hotelName, regularWeekDay, regularWeekEnd);
+	public boolean addHotel(String hotelName, int regularWeekDay, int regularWeekEnd,int ratings) {
+		Hotel hotel = new Hotel(hotelName, regularWeekDay, regularWeekEnd,ratings);
 		listOfHotel.add(hotel);
 		return true;
 	}
@@ -70,9 +70,9 @@ public class HotelReservation {
 		System.out.println("Format- type:date1, date2.");
 		String userInput = obj.nextLine();
 		HotelReservation addHotel = new HotelReservation();
-		addHotel.addHotel("Lakewood", 110, 90);
-		addHotel.addHotel("Bridgewood", 150, 50);
-		addHotel.addHotel("Ridgewood", 220, 150);
+		addHotel.addHotel("Lakewood", 110, 90,3);
+		addHotel.addHotel("Bridgewood", 150, 50,4);
+		addHotel.addHotel("Ridgewood", 220, 150,5);
 		Hotel cheapestHotel = addHotel.determiningcheapestHotelBasedOnUserInput(userInput);
 		System.out.println("Cheapest Hotel-" + cheapestHotel.getHotelName() + " Total Rate-" + cheapestHotel.getTotalRate());
 		obj.close();
