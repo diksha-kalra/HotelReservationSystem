@@ -17,13 +17,13 @@ public class HotelReservation {
 		listOfHotel.add(hotel);
 		return true;
 	}
-	
-	public Hotel totalRates(String startDay,String endDay, long dayRange) {
+
+	public Hotel totalRates(String startDay, String endDay, long dayRange) {
 		long weekends = 0;
-		if (startDay.equalsIgnoreCase("sun")||startDay.equalsIgnoreCase("sat")){
+		if (startDay.equalsIgnoreCase("sun") || startDay.equalsIgnoreCase("sat")) {
 			++weekends;
 		}
-		if(endDay.equalsIgnoreCase("sun")||endDay.equalsIgnoreCase("sat")) {
+		if (endDay.equalsIgnoreCase("sun") || endDay.equalsIgnoreCase("sat")) {
 			++weekends;
 		}
 		Long weekdays = dayRange - weekends;
@@ -32,14 +32,14 @@ public class HotelReservation {
 			hotel.setTotalRate(totalRate);
 			System.out.println(totalRate);
 		}
-		
+
 		Hotel cheapestHotel = listOfHotel.stream().sorted(Comparator.comparing(Hotel::getTotalRate)).findFirst()
 				.orElse(null);
 		return cheapestHotel;
 	}
 
 	public Hotel determiningcheapestHotelBasedOnUserInput(String userInput) throws ParseException {
-		Date startDate=null, endDate=null;
+		Date startDate = null, endDate = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy");
 		int index = userInput.indexOf(":");
 		String type = userInput.substring(0, index);
@@ -50,16 +50,16 @@ public class HotelReservation {
 		endDateIndex1 = userInput.indexOf(", ");
 		endDateIndex2 = userInput.indexOf(".");
 		try {
-		startDate = formatter.parse(userInput.substring(startDateIndex1 + 1, startDateIndex2));
-		endDate = formatter.parse(userInput.substring(endDateIndex1 + 2, endDateIndex2));
-		}catch(ParseException e ) {
+			startDate = formatter.parse(userInput.substring(startDateIndex1 + 1, startDateIndex2));
+			endDate = formatter.parse(userInput.substring(endDateIndex1 + 2, endDateIndex2));
+		} catch (ParseException e) {
 			System.out.println("give input in proper format");
 		}
 		long dateRange = 1 + (endDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24;
 		DateFormat format2 = new SimpleDateFormat("EE");
 		String startDay = format2.format(startDate);
 		String endDay = format2.format(endDate);
-		Hotel cheapestHotel = totalRates(startDay,endDay,dateRange);
+		Hotel cheapestHotel = totalRates(startDay, endDay, dateRange);
 		return cheapestHotel;
 	}
 
@@ -71,7 +71,11 @@ public class HotelReservation {
 		String userInput = obj.nextLine();
 		HotelReservation addHotel = new HotelReservation();
 		addHotel.addHotel("Lakewood", 110, 90);
+		addHotel.addHotel("Bridgewood", 150, 50);
+		addHotel.addHotel("Ridgewood", 220, 150);
 		Hotel cheapestHotel = addHotel.determiningcheapestHotelBasedOnUserInput(userInput);
-		System.out.println("Cheapest Hotel-" + cheapestHotel.getHotelName() + " Total Rate-" + cheapestHotel.getTotalRate());
+		System.out.println(
+				"Cheapest Hotel-" + cheapestHotel.getHotelName() + " Total Rate-" + cheapestHotel.getTotalRate());
+		obj.close();
 	}
 }
