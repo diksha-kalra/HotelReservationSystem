@@ -22,7 +22,8 @@ public class HotelReservation {
 		return true;
 	}
 
-	public void settotalRates(String startDay, String endDay, long dayRange, String type)throws InvalidEntriesException {
+	public void settotalRates(String startDay, String endDay, long dayRange, String type)
+			throws InvalidEntriesException {
 		long weekends = 0;
 		if (startDay.equalsIgnoreCase("sun") || startDay.equalsIgnoreCase("sat")) {
 			++weekends;
@@ -37,13 +38,11 @@ public class HotelReservation {
 					Long totalRate = weekdays * hotel.getRegularWeekDay() + weekends * hotel.getRegularWeekEnd();
 					hotel.setTotalRate(totalRate);
 				}
-			}
-			if (type.equalsIgnoreCase("rewards")) {
+			} else if (type.equalsIgnoreCase("rewards")) {
 				for (Hotel hotel : listOfHotel) {
 					Long totalRate = weekdays * hotel.getRewardCustomerWeekDay()
 							+ weekends * hotel.getRewardCustomerWeekEnd();
 					hotel.setTotalRate(totalRate);
-					System.out.println(hotel.getTotalRate());
 				}
 			} else {
 				throw new InvalidEntriesException("invalid customer type");
@@ -75,9 +74,6 @@ public class HotelReservation {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy");
 		int index = userInput.indexOf(":");
 		String type = userInput.substring(0, index);
-		if (type.equalsIgnoreCase("regular") || type.equalsIgnoreCase("rewards")) {
-
-		}
 		int startDateIndex1 = 0, startDateIndex2 = 0;
 		startDateIndex1 = userInput.indexOf(":");
 		startDateIndex2 = userInput.indexOf(",");
@@ -105,11 +101,10 @@ public class HotelReservation {
 		} catch (InvalidEntriesException e) {
 			System.out.println(e);
 		}
-
 		return cheapestHotel;
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		Scanner obj = new Scanner(System.in);
 		System.out.println("Welcome To Hotel Reservation Program");
 		HotelReservation addHotel = new HotelReservation();
