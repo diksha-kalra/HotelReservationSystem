@@ -3,7 +3,9 @@ package com.cg.hotelreservationprogram;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,8 +35,18 @@ public class HotelReservation {
 			System.out.println(totalRate);
 		}
 
-		Hotel cheapestHotel = listOfHotel.stream().sorted(Comparator.comparing(Hotel::getTotalRate)).findFirst()
-				.orElse(null);
+		List<Hotel> sortedListOfHotel = listOfHotel.stream().sorted(Comparator.comparing(Hotel::getTotalRate)).collect(Collectors.toList());
+		Hotel cheapestHotel=sortedListOfHotel.get(0);
+		for(Hotel hotels:sortedListOfHotel) {
+			if(hotels.getTotalRate()<=sortedListOfHotel.get(0).getTotalRate()) {
+				if(hotels.getRatings()>sortedListOfHotel.get(0).getRatings()) {
+					cheapestHotel=hotels;
+				}
+			}
+			else {
+				break;
+			}	
+		}
 		return cheapestHotel;
 	}
 

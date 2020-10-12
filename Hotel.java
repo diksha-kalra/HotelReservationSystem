@@ -12,6 +12,7 @@ public class Hotel{
 		this.hotelName = hotelName;
 		this.regularWeekDay = regularWeekDay;
 		this.regularWeekEnd = regularWeekEnd;
+		this.ratings=ratings;
 	}
 
 	public String getHotelName() {
