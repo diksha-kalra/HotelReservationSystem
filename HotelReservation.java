@@ -22,7 +22,7 @@ public class HotelReservation {
 		return true;
 	}
 
-	public void settotalRates(String startDay, String endDay, long dayRange, String type) {
+	public void settotalRates(String startDay, String endDay, long dayRange, String type)throws InvalidEntriesException {
 		long weekends = 0;
 		if (startDay.equalsIgnoreCase("sun") || startDay.equalsIgnoreCase("sat")) {
 			++weekends;
@@ -31,20 +31,25 @@ public class HotelReservation {
 			++weekends;
 		}
 		Long weekdays = dayRange - weekends;
-
-		if (type.equalsIgnoreCase("regular")) {
-			for (Hotel hotel : listOfHotel) {
-				Long totalRate = weekdays * hotel.getRegularWeekDay() + weekends * hotel.getRegularWeekEnd();
-				hotel.setTotalRate(totalRate);
+		try {
+			if (type.equalsIgnoreCase("regular")) {
+				for (Hotel hotel : listOfHotel) {
+					Long totalRate = weekdays * hotel.getRegularWeekDay() + weekends * hotel.getRegularWeekEnd();
+					hotel.setTotalRate(totalRate);
+				}
 			}
-		}
-		if (type.equalsIgnoreCase("rewards")) {
-			for (Hotel hotel : listOfHotel) {
-				Long totalRate = weekdays * hotel.getRewardCustomerWeekDay()
-						+ weekends * hotel.getRewardCustomerWeekEnd();
-				hotel.setTotalRate(totalRate);
-				System.out.println(hotel.getTotalRate());
+			if (type.equalsIgnoreCase("rewards")) {
+				for (Hotel hotel : listOfHotel) {
+					Long totalRate = weekdays * hotel.getRewardCustomerWeekDay()
+							+ weekends * hotel.getRewardCustomerWeekEnd();
+					hotel.setTotalRate(totalRate);
+					System.out.println(hotel.getTotalRate());
+				}
+			} else {
+				throw new InvalidEntriesException("invalid customer type");
 			}
+		} catch (InvalidEntriesException e) {
+			System.out.println(e);
 		}
 	}
 
@@ -87,11 +92,20 @@ public class HotelReservation {
 			e.printStackTrace();
 		}
 		long dateRange = 1 + (endDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24;
-		DateFormat format2 = new SimpleDateFormat("EE");
-		String startDay = format2.format(startDate);
-		String endDay = format2.format(endDate);
-		settotalRates(startDay, endDay, dateRange, type);
-		cheapestHotel = cheapestHotel();
+		try {
+			if (dateRange > 0) {
+				DateFormat format2 = new SimpleDateFormat("EE");
+				String startDay = format2.format(startDate);
+				String endDay = format2.format(endDate);
+				settotalRates(startDay, endDay, dateRange, type);
+				cheapestHotel = cheapestHotel();
+			} else {
+				throw new InvalidEntriesException("invalid date range");
+			}
+		} catch (InvalidEntriesException e) {
+			System.out.println(e);
+		}
+
 		return cheapestHotel;
 	}
 
