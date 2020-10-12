@@ -69,7 +69,7 @@ public class HotelReservation {
 		return cheapestHotel;
 	}
 
-	public Hotel determiningcheapestHotelBasedOnUserInput(String userInput) throws ParseException {
+	public Hotel determiningcheapestHotelBasedOnUserInput(String userInput) {
 		Hotel cheapestHotel = null;
 		Date startDate = null, endDate = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy");
@@ -109,7 +109,7 @@ public class HotelReservation {
 		return cheapestHotel;
 	}
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args){
 		Scanner obj = new Scanner(System.in);
 		System.out.println("Welcome To Hotel Reservation Program");
 		HotelReservation addHotel = new HotelReservation();
