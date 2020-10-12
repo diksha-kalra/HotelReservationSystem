@@ -36,6 +36,13 @@ public class HotelReservation {
 		}
 
 		List<Hotel> sortedListOfHotel = listOfHotel.stream().sorted(Comparator.comparing(Hotel::getTotalRate)).collect(Collectors.toList());
+		Hotel bestRatedHotel=sortedListOfHotel.get(0);
+		for(Hotel hotels:sortedListOfHotel) {
+			if(hotels.getRatings()>sortedListOfHotel.get(0).getRatings()) {
+				bestRatedHotel=hotels;
+			}
+		}
+		System.out.println("Best Rated hotel: "+bestRatedHotel.getHotelName()+" rating: "+bestRatedHotel.getRatings()+" total Rate: "+bestRatedHotel.getTotalRate());
 		Hotel cheapestHotel=sortedListOfHotel.get(0);
 		for(Hotel hotels:sortedListOfHotel) {
 			if(hotels.getTotalRate()<=sortedListOfHotel.get(0).getTotalRate()) {
@@ -86,7 +93,7 @@ public class HotelReservation {
 		addHotel.addHotel("Bridgewood", 150, 50,4);
 		addHotel.addHotel("Ridgewood", 220, 150,5);
 		Hotel cheapestHotel = addHotel.determiningcheapestHotelBasedOnUserInput(userInput);
-		System.out.println("Cheapest Hotel-" + cheapestHotel.getHotelName() + " Total Rate-" + cheapestHotel.getTotalRate());
+		System.out.println("Cheapest Hotel: " + cheapestHotel.getHotelName()+" rating: "+cheapestHotel.getRatings()+ " Total Rate: " + cheapestHotel.getTotalRate());
 		obj.close();
 	}
 }
